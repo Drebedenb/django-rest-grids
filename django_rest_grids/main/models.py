@@ -12,16 +12,6 @@ class PriceWinguardMain(models.Model):
         db_table = 'price_winguard_main'
 
 
-class PriceWinguardFiles(models.Model):
-    price_winguard_FilesType_id = models.IntegerField()
-    price_winguard_sketch = models.ForeignKey('PriceWinguardSketch', on_delete=models.PROTECT)
-    path = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = 'price_winguard_files'
-
-
-
 class PriceWinguardSketch(models.Model):
     category = models.IntegerField()
     number = models.IntegerField()
