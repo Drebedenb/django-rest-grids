@@ -9,6 +9,8 @@ jobs:
         run: sudo apt update
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Install python 3.8
+        uses: actions/checkout@v3
       - name: Install pip
         run: sudo apt install python3-pip
       - name: Install requirements
@@ -17,3 +19,7 @@ jobs:
         env:
           DJANGO_SETTINGS_MODULE: django_rest_grids.settings
         run: python manage.py test
+      - name: Check readiness for deploy
+        env:
+          DJANGO_SETTINGS_MODULE: django_rest_grids.settings
+        run: python manage.py check --deploy
