@@ -16,6 +16,8 @@ jobs:
       - name: Install requirements
         run: |
           ls
+          cd django_rest_grids
+          ls
           pip install -r requirements.txt
       - name: Execute tests
         run: |
