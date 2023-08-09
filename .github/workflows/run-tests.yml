@@ -14,8 +14,8 @@ jobs:
       - name: Install pip
         run: sudo apt install python3-pip
       - name: Install requirements
-        run: |
-          ls
-          pip install -r requirements.txt
+        run:  pip install -r requirements.txt
       - name: Check readiness for deploy
-        run: python manage.py check --deploy
+        run: |
+          cd django_rest_grids
+          python manage.py check --deploy
