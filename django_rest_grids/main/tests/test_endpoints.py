@@ -1,7 +1,7 @@
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, TransactionTestCase, TestCase
 
 
-class UnitTestOfEndpoints(SimpleTestCase):
+class UnitTestOfEndpoints(TestCase):
     def test_valid_count(self):
         url = '/count'
         response = self.client.get(url)

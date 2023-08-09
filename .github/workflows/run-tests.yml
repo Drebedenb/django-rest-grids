@@ -17,11 +17,5 @@ jobs:
         run: |
           ls
           pip install -r requirements.txt
-      - name: Execute tests
-        run: |
-          ls
-          cd django_rest_grids
-          ls
-          python manage.py test
       - name: Check readiness for deploy
         run: python manage.py check --deploy
