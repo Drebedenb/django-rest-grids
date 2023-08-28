@@ -4,13 +4,13 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from django.core.cache import cache
 
-from main.serializers import *
+from .serializers import ManyProductsSerializer
 from .models import PriceWinguardMain, PriceWinguardSketch
 
 TTL_OF_CACHE_SECONDS = 60 * 60 * 24
 
 
-class ProductByCategoryAndNumber(ListAPIView): #need to use postman to see results of Response(serializer.data)
+class ProductByCategoryAndNumber(ListAPIView):
     def get(self, request, category, number):
         if isinstance(category, int):
             category = [category]
