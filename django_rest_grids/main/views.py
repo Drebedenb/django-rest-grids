@@ -10,7 +10,7 @@ from .models import PriceWinguardMain, PriceWinguardSketch
 TTL_OF_CACHE_SECONDS = 60 * 60 * 24
 
 
-class ProductByCategoryAndNumber(ListAPIView):
+class ProductByCategoryAndNumber(RetrieveAPIView):
     def get(self, request, category, number):
         if isinstance(category, int):
             category = [category]
@@ -33,7 +33,7 @@ class ProductByCategoryAndNumber(ListAPIView):
             )
             product = ManyProductsSerializer(product, many=True).data
             cache.set(cache_key, product, TTL_OF_CACHE_SECONDS)
-        return Response(product)
+        return Response({'product': product})
 
 
 class Products(ListAPIView):
@@ -81,7 +81,7 @@ class Products(ListAPIView):
             ).order_by(f'{order_by_name}')[:limit]
             products_list = ManyProductsSerializer(queryset, many=True).data
             cache.set(cache_key, products_list, TTL_OF_CACHE_SECONDS)
-        return Response(products_list)
+        return Response({'grids_list': products_list})
 
 
 class MinPriceOfCategories(RetrieveAPIView):
