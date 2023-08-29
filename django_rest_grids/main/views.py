@@ -4,13 +4,13 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from django.core.cache import cache
 
-from main.serializers import *
+from .serializers import ManyProductsSerializer
 from .models import PriceWinguardMain, PriceWinguardSketch
 
 TTL_OF_CACHE_SECONDS = 60 * 60 * 24
 
 
-class ProductByCategoryAndNumber(ListAPIView): #need to use postman to see results of Response(serializer.data)
+class ProductByCategoryAndNumber(RetrieveAPIView):
     def get(self, request, category, number):
         if isinstance(category, int):
             category = [category]
@@ -33,7 +33,7 @@ class ProductByCategoryAndNumber(ListAPIView): #need to use postman to see resul
             )
             product = ManyProductsSerializer(product, many=True).data
             cache.set(cache_key, product, TTL_OF_CACHE_SECONDS)
-        return Response(product)
+        return Response({'product': product})
 
 
 class Products(ListAPIView):
@@ -81,7 +81,7 @@ class Products(ListAPIView):
             ).order_by(f'{order_by_name}')[:limit]
             products_list = ManyProductsSerializer(queryset, many=True).data
             cache.set(cache_key, products_list, TTL_OF_CACHE_SECONDS)
-        return Response(products_list)
+        return Response({'grids_list': products_list})
 
 
 class MinPriceOfCategories(RetrieveAPIView):

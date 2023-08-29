@@ -9,7 +9,6 @@ class ManyProductsSerializer(serializers.ModelSerializer):
     path_file = serializers.IntegerField()
     price = serializers.IntegerField()
     saleprice = serializers.IntegerField()
-
     class Meta:
         model = PriceWinguardMain
         fields = ['id', 'price_winguard_sketch_id', 'percent', 'stars_count','path_folder','path_file', 'price', 'saleprice']
